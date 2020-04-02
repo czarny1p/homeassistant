@@ -1,0 +1,252 @@
+#Sypialnia
+title: Sypialnia
+icon: mdi:bed-empty
+badges:
+  - entity: weather.dark_sky
+cards:
+  - type: map
+    entities:
+      - entity: device_tracker.hd1910
+      - entity: zone.home
+      - entity: zone.praca_artur
+      - entity: zone.praca_kasia
+  - type: entities
+    title: Oczyszczacz
+    entities:
+      - entity: fan.nawilzacz
+      - entity: sensor.nawilzacz_temp
+      - entity: sensor.nawilzacz_humidity
+      - entity: sensor.nawilzacz_depth
+      - entity: sensor.nawilzacz_speed
+      - entity: sensor.nawilzacz_use_time
+      - entity: sensor.nawilzacz_mode
+      - entity: switch.nawilzacz_led
+      - entity: switch.nawilzacz_child_lock
+      - entity: switch.nawilzacz_buzzer
+      - entity: switch.nawilzacz_power
+  - elements:
+#Wiatrak
+    - entity: fan.nawilzacz
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        margin-right: '-10%'
+        right: 16%
+        top: 85%
+      tap_action:
+        action: call-service
+        service: fan.toggle
+        service_data:
+          entity_id: fan.nawilzacz
+      type: state-icon
+#Wilgotość
+    - icon: 'mdi:water-percent'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        color: dodgerblue
+        left: 15%
+        top: 25%
+      tap_action: none
+      type: icon
+#Wilgotość
+    - attribute: humidity
+      color_stops: null
+      entity: fan.nawilzacz
+      fill: 'rgba(0,0,0,0.3)'
+      font_style:
+        color: white
+      gradient: true
+      max: 100
+      min: 0
+      show_card: null
+      stroke_width: 10
+      style:
+        height: 60px
+        left: 15%
+        top: 25%
+        width: 60px
+      type: 'custom:circle-sensor-card'
+      units: '%'
+#Temperatura
+    - icon: 'mdi:thermometer'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        color: dodgerblue
+        left: 15%
+        top: 45%
+      tap_action: none
+      type: icon
+#Temperatura
+    - attribute: temperature
+      entity: fan.nawilzacz
+      fill: 'rgba(0,0,0,0.3)'
+      font_style:
+        color: white
+      gradient: true
+      max: 50
+      min: 0
+      show_card: false
+      stroke_width: 10
+      style:
+        height: 60px
+        left: 15%
+        top: 45%
+        width: 60px
+      type: 'custom:circle-sensor-card'
+      units: °C
+#Ilość wody
+    - icon: 'mdi:air-humidifier'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        color: dodgerblue
+        left: 16%
+        top: 64%
+      tap_action: none
+      type: icon
+#Ilość wody
+    - attribute: depth
+      entity: fan.nawilzacz
+      fill: 'rgba(0,0,0,0.3)'
+      font_style:
+        color: white
+      gradient: true
+      max: 100
+      min: 0
+      show_card: false
+      stroke_width: 10
+      style:
+        height: 60px
+        left: 15%
+        top: 65%
+        width: 60px
+      type: 'custom:circle-sensor-card'
+      units: ''
+#Prędkość wiatraka
+    - icon: 'mdi:speedometer'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        color: dodgerblue
+        left: 15%
+        top: 84%
+      tap_action: none
+      type: icon
+#Prędkość wiatraka
+    - attribute: motor_speed
+      entity: fan.nawilzacz
+      fill: 'rgba(0,0,0,0.3)'
+      font_style:
+        color: white
+      gradient: true
+      max: 2000
+      min: 0
+      show_card: false
+      stroke_width: 10
+      style:
+        height: 60px
+        left: 15%
+        top: 85%
+        width: 60px
+      type: 'custom:circle-sensor-card'
+      units: ''
+#Wybrany tryb
+    - entity: sensor.nawilzacz_mode
+      max: 2000
+      min: 0
+      prefix: 'Tryb: '
+      style:
+        background-color: 'rgba(0, 0, 0,.0)'
+        border-color: 'rgb(34, 154, 210,.0)'
+        border-left-style: solid
+        color: 'rgba(255, 255, 255,)'
+        font-family: Trebuchet MS
+        font-size: 100%
+        font-weight: bold
+        left: 82%
+        margin-right: '-50%'
+        opacity: 1
+        pointer-events: none
+#        text-shadow: 1px 1px black
+        top: 3%
+        transform: 'translate(-50%,-0%)'
+      type: state-label
+#Tryb Automatyczny
+    - icon: 'mdi:brightness-auto'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        right: 5%
+        top: 21%
+      tap_action:
+        action: call-service
+        service: fan.set_speed
+        service_data:
+          entity_id: fan.nawilzacz
+          speed: Auto
+      type: icon
+#Tryb Cichy
+    - icon: 'mdi:power-sleep'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        right: 5%
+        top: 37%
+      tap_action:
+        action: call-service
+        service: fan.set_speed
+        service_data:
+          entity_id: fan.nawilzacz
+          speed: Silent
+      type: icon
+#Tryb Średni
+    - icon: 'mdi:minus-box-outline'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        right: 5%
+        top: 53%
+      tap_action:
+        action: call-service
+        service: fan.set_speed
+        service_data:
+          entity_id: fan.nawilzacz
+          speed: Medium
+      type: icon
+#Tryb Maksymalny
+    - icon: 'mdi:menu'
+      style:
+        '--iron-icon-height': 45px
+        '--iron-icon-width': 45px
+        right: 5%
+        top: 69%
+      tap_action:
+        action: call-service
+        service: fan.set_speed
+        service_data:
+          entity_id: fan.nawilzacz
+          speed: High
+      type: icon
+#Czas działania
+    - entity: sensor.nawilzacz_use_time
+      prefix: 'Działa: '
+      style:
+        background-color: 'rgba(0, 0, 0,.0)'
+        border-color: 'rgb(34, 154, 210,.0)'
+        border-left-style: solid
+        color: dodgerblue
+        font-family: Trebuchet MS
+        font-size: 100%
+        font-weight: bold
+        left: 2%
+        margin-right: '-50%'
+        opacity: 1
+        pointer-events: none
+        top: 5%
+        transform: 'translate(0%,-50%)'
+      type: state-label
+    image: /local/pictures/nawilzacz1.png
+    type: picture-elements
+type: 'custom:vertical-stack-in-card'

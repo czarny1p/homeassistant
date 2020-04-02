@@ -1,0 +1,26 @@
+title: Dom
+badges:
+  - entity: binary_sensor.updater
+  - entity: sun.sun
+icon: mdi:home-assistant
+cards:
+  - type: 'custom:weather-card'
+    title: Weather
+    entity: weather.dark_sky
+    icons: '/local/custom-lovelace/weather-card/icons/'
+  - type: map
+    entities:
+      - entity: zone.home
+      - entity: zone.praca_artur
+      - entity: zone.praca_kasia
+      - entity: device_tracker.hd1910
+      - entity: device_tracker.redmi_note_8_pro
+#   - type: entities
+#     title: Weather
+#     show_header_toggle: false
+#     entities:
+#       - sensor.dark_sky_summaryzone
+#       - sensor.pollen_level
+#       - sensor.cold_flu_risk
+#       - sensor.dark_sky_hourly_summary
+#       - sensor.dark_sky_daily_summary

@@ -1,0 +1,260 @@
+# System
+title: System
+icon: mdi:settings
+path: system 
+cards:
+  #######################
+  # INTERNET CONNECTION #
+  #######################
+  - type: 'custom:hui-entities-card'
+    show_header_toggle: off
+    style: |
+      ha-card { border-radius: 20px; }
+    entities:
+      - type: section
+        label: Speed Test
+      - type: custom:hui-vertical-stack-card
+        cards:
+        - type: horizontal-stack
+          cards:
+            - type: custom:mini-graph-card
+              name: 'Download'
+              height: 20
+              line_width: 2
+              font_size: 70
+              hours_to_show: 168
+              points_per_hour: 1
+              show:
+                extrema: true
+                fill: true
+              style: |
+                ha-card { 
+                  --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                  --ha-card-box-shadow: 'none';
+                  border-radius: 5px;
+                  margin: 5px;
+                }
+              entities: 
+                - sensor.speedtest_download
+              color_thresholds:
+                - value: 99.9
+                  color: "#3498db"
+                - value: 0
+                  color: "#E45E65"
+            - type: custom:mini-graph-card
+              name: 'Upload'
+              height: 20
+              line_width: 2
+              font_size: 70
+              hours_to_show: 168
+              points_per_hour: 1
+              show:
+                extrema: true
+                fill: true
+              style: |
+                ha-card { 
+                  --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                  --ha-card-box-shadow: 'none';
+                  border-radius: 5px;
+                  margin: 5px;
+                }
+              entities: 
+                - sensor.speedtest_upload
+              color_thresholds:
+                - value: 9.9
+                  color: "#3498db"
+                - value: 0
+                  color: "#E45E65"
+        - type: custom:mini-graph-card
+          name: 'Ping'
+          height: 20
+          line_width: 2
+          font_size: 70
+          hours_to_show: 168
+          points_per_hour: 1
+          show:
+            extrema: true
+            fill: true
+          style: |
+            ha-card { 
+              --ha-card-background: "rgba(0, 0, 0, 0.0)";
+              --ha-card-box-shadow: 'none';
+              border-radius: 5px;
+              margin: 5px;
+            }
+          entities: 
+            - sensor.speedtest_ping
+          color_thresholds:
+            - value: 80
+              color: "#E45E65"
+            - value: 0
+              color: "#3498db"
+  ##################################
+  - type: entities
+    title: Internet
+    entities:
+      - device_tracker.hd1910
+      - sensor.hd1910_wifi_connection
+      - sensor.cpu_temperature
+      - sensor.disk_use_percent_home
+      - sensor.disk_use_home
+      - sensor.disk_free_home
+      - sensor.memory_use
+      - sensor.memory_free
+      - sensor.memory_use_percent
+      - sensor.processor_use
+      - sensor.last_boot
+  ##################################
+  # HOME ASSISTANT HARDWARE STATUS #
+  ##################################
+  - type: custom:config-template-card
+    variables:
+      - states['sensor.current_version'].state
+      - states['sensor.disk_use_total'].state
+      - states['sensor.disk_use_home'].state
+    entities:
+      - sensor.current_version
+      - sensor.disk_free_home
+      - sensor.disk_use_home
+      - sensor.cpu_temperature
+    card:
+      type: custom:hui-entities-card
+      show_header_toggle: off
+      style: |
+        ha-card { border-radius: 20px; }
+      entities:
+        - type: section
+          label: "${ 'Raspberry Pi 3B + ' + vars[0] }"
+        - type: custom:hui-vertical-stack-card
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: picture
+                  style: |
+                    ha-card { 
+                      --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                      --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                      --ha-card-box-shadow: 'none';
+                    }
+                  image: /local/pictures/rpi.png
+                - type: custom:button-card
+                  layout: icon_name_state2nd
+                  show_icon: true
+                  show_state: true
+                  size: 100%
+                  styles:
+                    grid:
+                      - grid-template-columns: 1fr 2fr
+                    icon:
+                      - padding: 0px 20px
+                      - height: 30px
+                      - width: 30px
+                    card:
+                      - --ha-card-background: "rgba(0, 0, 0, 0.0)"
+                      - --ha-card-box-shadow: 'none'
+                    state:
+                      - padding: 0px 20px
+                      - justify-self: start
+                      - font-family: Roboto, sans-serif
+                      - font-size: 15px
+                    name:
+                      - padding: 0px 20px
+                      - justify-self: start
+                      - color: var(--secondary-text-color)
+                  entity: sensor.rpi_uptime
+                  name: Uptime
+                  icon: mdi:clock-outline
+            - type: custom:bar-card
+              title_position: inside
+              show_icon: true
+              align: split
+              columns: 1
+              max: 100
+              unit_of_measurement: "%"
+              severity:
+                - value: 50
+                  color: "#3498db"
+                - value: 75
+                  color: "#f39c12"
+                - value: 100
+                  color: "#e45e65"
+              style: |
+                ha-card { 
+                  --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                  --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                  --ha-card-box-shadow: 'none';
+                }
+              entity: sensor.disk_use_percent_home
+              title: "${ 'Disk (' + vars[2] + 'Gb/' + vars[1] + 'Gb)' }"
+            - type: horizontal-stack
+              cards:
+                - type: custom:bar-card
+                  title_position: inside
+                  show_icon: true
+                  align: split
+                  columns: 1
+                  max: 100
+                  unit_of_measurement: "%"
+                  severity:
+                    - value: 50
+                      color: "#3498db"
+                    - value: 75
+                      color: "#f39c12"
+                    - value: 100
+                      color: "#e45e65"
+                  style: |
+                    ha-card { 
+                      --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                      --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                      --ha-card-box-shadow: 'none';
+                    }
+                  entity: sensor.memory_use_percent
+                  title: RAM
+                - type: custom:bar-card
+                  title_position: inside
+                  show_icon: true
+                  align: split
+                  columns: 1
+                  max: 100
+                  unit_of_measurement: "%"
+                  severity:
+                    - value: 50
+                      color: "#3498db"
+                    - value: 75
+                      color: "#f39c12"
+                    - value: 100
+                      color: "#e45e65"
+                  style: |
+                    ha-card { 
+                      --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                      --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                      --ha-card-box-shadow: 'none';
+                    }
+                  entity: sensor.processor_use
+                  title: CPU
+#Temperatura Raspberry
+            - type: custom:mini-graph-card
+              height: 20
+              line_width: 2
+              font_size: 70
+              hours_to_show: 168
+              points_per_hour: 1
+              show:
+                extrema: true
+                fill: true
+              style: |
+                ha-card { 
+                  --paper-card-background-color: 'rgba(0, 0, 0, 0.0)';
+                  --ha-card-background: "rgba(0, 0, 0, 0.0)";
+                  --ha-card-box-shadow: 'none';
+                }
+              entities: 
+                - sensor.cpu_temperature
+              name: Temperature
+              color_thresholds:
+                - value: 90
+                  color: "#3498db"
+                - value: 120
+                  color: "#f39c12"
+                - value: 150
+                  color: "#E45E65"

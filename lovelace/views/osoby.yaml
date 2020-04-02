@@ -1,0 +1,28 @@
+#Osoby
+title: Osoby
+icon: mdi:human-male-female
+badges:
+  - entity: person.artur
+  - entity: device_tracker.hd1910
+  - entity: sensor.oneplus7tpro_battery_level
+  - entity: person.kasia
+  - entity: device_tracker.redmi_note_8_pro
+  - entity: sensor.redmi_note_8_pro_battery_level
+cards:
+  - type: entities
+    title: Internet
+    entities:
+      - device_tracker.hd1910
+      - sensor.hd1910_wifi_connection
+      - device_tracker.redmi_note_8_pro
+      - sensor.redmi_note_8_pro_wifi_connection
+  - type: entities
+    title: Bateria
+    entities: 
+      - sensor.oneplus7tpro_battery_level
+      - sensor.redmi_note_8_pro_battery_level
+  - type: entities
+    title: Lokalizacja
+    entities: 
+      - sensor.hd1910_geocoded_location
+      - sensor.redmi_note_8_pro_geocoded_location
