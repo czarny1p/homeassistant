@@ -1,0 +1,100 @@
+# Xiaomi Oczyszczacz
+- platform: template
+  switches:
+    xiaomi_airpurifier_led:
+      friendly_name: "LED"
+      value_template: "{{ is_state_attr('fan.Oczyszczacz', 'led', true) }}"
+      turn_on:
+        service: xiaomi_miio.fan_set_led_on
+        data:
+          entity_id: fan.Oczyszczacz
+      turn_off:
+        service: xiaomi_miio.fan_set_led_off
+        data:
+          entity_id: fan.Oczyszczacz
+      icon_template: "mdi:lightbulb-outline"
+    xiaomi_airpurifier_child_lock:
+      friendly_name: "Child lock"
+      value_template: "{{ is_state_attr('fan.Oczyszczacz', 'child_lock', true) }}"
+      turn_on:
+        service: xiaomi_miio.fan_set_child_lock_on
+        data:
+          entity_id: fan.Oczyszczacz
+      turn_off:
+        service: xiaomi_miio.fan_set_child_lock_off
+        data:
+          entity_id: fan.Oczyszczacz
+      icon_template: "mdi:lock-outline"
+    xiaomi_airpurifier_buzzer:
+      friendly_name: "Buzzer"
+      value_template: "{{ is_state_attr('fan.Oczyszczacz', 'buzzer', true) }}"
+      turn_on:
+        service: xiaomi_miio.fan_set_buzzer_on
+        data:
+          entity_id: fan.Oczyszczacz
+      turn_off:
+        service: xiaomi_miio.fan_set_buzzer_off
+        data:
+          entity_id: fan.Oczyszczacz
+      icon_template: "mdi:volume-high"
+    xiaomi_airpurifier_power:
+      friendly_name: "Power"
+      value_template: "{{ is_state_attr('fan.Oczyszczacz', 'turn', true) }}"
+      turn_on:
+        service: fan.turn_on
+        data:
+          entity_id: fan.Oczyszczacz
+      turn_off:
+        service: fan.turn_off
+        data:
+          entity_id: fan.Oczyszczacz
+# Xiaomi Nawilżacz
+- platform: template
+  switches:
+    nawilzacz_led:
+      friendly_name: "LED"
+      value_template: "{{ is_state_attr('fan.nawilzacz', 'led', true) }}"
+      turn_on:
+        service: xiaomi_miio.fan_set_led_on
+        data:
+          entity_id: fan.nawilzacz
+      turn_off:
+        service: xiaomi_miio.fan_set_led_off
+        data:
+          entity_id: fan.nawilzacz
+      icon_template: "mdi:lightbulb-outline"
+    nawilzacz_child_lock:
+      friendly_name: "Child lock"
+      value_template: "{{ is_state_attr('fan.nawilzacz', 'child_lock', true) }}"
+      turn_on:
+        service: xiaomi_miio.fan_set_child_lock_on
+        data:
+          entity_id: fan.nawilzacz
+      turn_off:
+        service: xiaomi_miio.fan_set_child_lock_off
+        data:
+          entity_id: fan.nawilzacz
+      icon_template: "mdi:lock-outline"
+    nawilzacz_buzzer:
+      friendly_name: "Buzzer"
+      value_template: "{{ is_state_attr('fan.nawilzacz', 'buzzer', true) }}"
+      turn_on:
+        service: xiaomi_miio.fan_set_buzzer_on
+        data:
+          entity_id: fan.nawilzacz
+      turn_off:
+        service: xiaomi_miio.fan_set_buzzer_off
+        data:
+          entity_id: fan.nawilzacz
+      icon_template: "mdi:volume-high"
+    nawilzacz_power:
+      friendly_name: "Dry"
+      value_template: "{{ is_state_attr('fan.nawilzacz', 'dry', true) }}"
+      turn_on:
+        service: xiaomi_miio.fan_set_dry_on
+        data:
+          entity_id: fan.nawilzacz
+      turn_off:
+        service: xiaomi_miio.fan_set_dry_off
+        data:
+          entity_id: fan.nawilzacz
