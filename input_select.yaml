@@ -1,0 +1,19 @@
+# Xiaomi Air Purifier 2
+oczyszczacz_mode:
+  name: Mode
+  options:
+    - auto
+    - silent
+    - favorite
+#    - idle
+  icon: "mdi:animation-outline"
+
+# Xiaomi Nawilżacz
+nawilzacz_mode:
+  name: Mode
+  options:
+    - Silent
+    - Medium
+    - High
+    - Auto
+  icon: "mdi:animation-outline"
