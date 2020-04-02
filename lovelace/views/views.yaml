@@ -1,0 +1,5 @@
+- !include dom.yaml
+- !include salon.yaml
+- !include sypialnia.yaml
+- !include osoby.yaml
+- !include ustawienia.yaml
