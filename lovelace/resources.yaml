@@ -1,0 +1,46 @@
+
+# Button Card (Most of the interface)
+
+- url: /local/community/button-card/button-card.js?v=3.2.3
+  type: module
+
+
+# Weather Card
+
+- url: /local/custom-lovelace/weather-card/weather-card.js
+  type: module
+
+
+#
+
+- url: /local/community/circle-sensor-card/circle-sensor-card.js?v=1.2.0
+  type: module
+
+
+#
+
+- url: /local/community/vertical-stack-in-card/vertical-stack-in-card.js
+  type: js
+
+
+#
+- url: /customcards/custom_ui/card-modder.js?
+  type: module
+  
+  
+# Mini Graph Card
+
+- url: /local/community/mini-graph-card/mini-graph-card-bundle.js?v=0.9.3
+  type: module
+
+
+# Config Template Card
+
+- url: /local/community/config-template-card/config-template-card.js?v=1.1.2
+  type: module
+
+
+# Bar Card
+
+- url: /local/community/bar-card/bar-card.js?v=2.0.2
+  type: js
