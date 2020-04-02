@@ -1,0 +1,95 @@
+#Aktualizacja Hassio
+- alias: Update Available Notification
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.updater
+      from: 'off'
+      to: 'on'
+  action:
+    - service: notify.notify
+      data_template:
+        message: "Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version') }} is available."
+
+
+# Xiaomi Air Purifier 2
+#Zmiana trybu czyszczenia
+- alias: Air Purifier mode change
+  trigger:
+    entity_id: input_select.oczyszczacz_mode
+    platform: state
+  action:
+    service: fan.set_speed
+    data_template:
+      entity_id: fan.oczyszczacz
+      speed: '{{ states(''input_select.oczyszczacz_mode'') }}'
+      #'{{ states.input_select.oczyszczacz_mode.state }}'
+- alias: Air Purifier mode changed
+  trigger:
+    platform: state
+    entity_id: fan.oczyszczacz
+  action:
+    service: input_select.select_option
+    entity_id: input_select.oczyszczacz_mode
+    data_template:
+      option: '{{ state_attr(''.fan.oczyszczacz'', ''mode'') }}'
+      #'{{ states.fan.oczyszczacz.attributes.mode }}'
+#Zmiana prędkości trybu favorite
+- alias: Air Purifier favorite level change
+  trigger:
+    entity_id: input_number.oczyszczacz_favorite_level
+    platform: state
+  action:
+    service: xiaomi_miio.fan_set_favorite_level
+    data_template:
+      entity_id: fan.oczyszczacz
+      level: '{{ states.input_number.oczyszczacz_favorite_level.state | int }}'
+- alias: Air Purifier favorite level changed
+  trigger:
+    platform: state
+    entity_id: fan.oczyszczacz
+  action:
+    service: input_number.set_value
+    entity_id: input_number.oczyszczacz_favorite_level
+    data_template:
+      value: '{{ states.fan.oczyszczacz.attributes.favorite_level }}'
+
+
+# Xiaomi Nawilżacz
+#Zmiana trybu nawilżania
+- alias: Nawilzacz mode change
+  trigger:
+    entity_id: input_select.nawilzacz_mode
+    platform: state
+  action:
+    service: fan.set_speed
+    data_template:
+      entity_id: fan.nawilzacz
+      speed: '{{ states.input_select.nawilzacz_mode.state }}'
+- alias: Nawilzacz mode changed
+  trigger:
+    platform: state
+    entity_id: fan.nawilzacz
+  action:
+    service: input_select.select_option
+    entity_id: input_select.nawilzacz_mode
+    data_template:
+      option: '{{ states.fan.nawilzacz.attributes.mode }}'
+#Zmiana doceloawej wilgotności
+- alias: Nawilzacz target humidity change
+  trigger:
+    entity_id: input_number.nawilzacz_target_humidity
+    platform: state
+  action:
+    service: xiaomi_miio.fan_set_target_humidity
+    data_template:
+      entity_id: fan.nawilzacz
+      level: '{{ states.input_number.nawilzacz_target_humidity.state | int }}'
+- alias: Nawilzacz target humidity changed
+  trigger:
+    platform: state
+    entity_id: fan.nawilzacz
+  action:
+    service: input_number.set_value
+    entity_id: input_number.nawilzacz_target_humidity
+    data_template:
+      value: '{{ states.fan.nawilzacz.attributes.target_humidity }}'

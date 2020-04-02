@@ -1,0 +1,48 @@
+homeassistant:
+# Configure a default setup of Home Assistant (frontend, api, etc)
+#default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+#http:
+# base_url: https:// kubiakowie.duckdns.org:8123
+# ssl_certificate: /ssl/fullchain.pem
+# ssl_key: /ssl/privkey.pem
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+cloud:
+config:
+conversation:
+history:
+
+automation: !include automations.yaml
+fan: !include fan.yaml
+group: !include groups.yaml
+lovelace:
+  mode: yaml
+mobile_app:
+scene: !include scenes.yaml
+script: !include scripts.yaml
+sensor: !include sensors.yaml
+switch: !include switches.yaml
+input_select: !include input_select.yaml
+input_number: !include input_number.yaml
+
+#Enables the frontend
+frontend: !include frontend.yaml
+
+system_health:
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_key
+    mode: daily
+
+updater:
+sun:
+person:
+map:
+logbook:
+speedtestdotnet: !include speedtestdotnet.yaml
